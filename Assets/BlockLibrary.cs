@@ -8,18 +8,31 @@ public class BlockLibrary : MonoBehaviour {
     private Block[] blocks;
 
     void Start() {
-        blocks = GetComponentsInChildren<Block>();
+        blocks = GetComponentsInChildren<Block>().SelectMany(block => {
+            Block[] rotatedBlocks = new Block[4];
+            rotatedBlocks[0] = block;
+
+            var block1 = Instantiate(block);
+            block1.setRotation(Block.Rotation.FRONT_IS_RIGHT);
+            rotatedBlocks[1] = block1;
+            block1.transform.parent = transform;
+            
+            var block2 = Instantiate(block);
+            block2.setRotation(Block.Rotation.FRONT_IS_BACK);
+            rotatedBlocks[2] = block2;
+            block2.transform.parent = transform;
+            
+            var block3 = Instantiate(block);
+            block3.setRotation(Block.Rotation.FRONT_IS_LEFT);
+            rotatedBlocks[3] = block3;
+            block3.transform.parent = transform;
+
+            return rotatedBlocks;
+        }).ToArray();
+
         foreach (Transform t in transform) {
             t.gameObject.SetActive(false);
         }
-
-        // int i = 0;
-        // foreach (var block in blocks) {
-        //     var newBlock = Instantiate(block.gameObject);
-        //     newBlock.transform.position = transform.position + Vector3.right * i;
-        //     newBlock.SetActive(true);
-        //     i++;
-        // }
     }
 
     public Block[] getBlocks() {
