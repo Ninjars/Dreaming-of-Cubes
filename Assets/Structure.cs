@@ -32,7 +32,6 @@ public class Structure : MonoBehaviour {
             switch (aspect) {
                 case Aspect.ACCESS:
                 case Aspect.OPEN:
-                    Debug.Log("Adding active site " + dir + " from " + position + ": " + targetSite);
                     activeSites.Add(targetSite);
                     break;
             }
@@ -69,11 +68,11 @@ public class Structure : MonoBehaviour {
 
         switch (aspectB) {
             case Aspect.WINDOW:
-                return aspectA == Aspect.OPEN;
+                return false;
             case Aspect.ACCESS:
                 return aspectA == Aspect.OPEN || aspectA == Aspect.ACCESS && fromBlock.getAccess(dir) == toBlock.getAccess(DirectionHelper.GetInverse(dir));
             case Aspect.OPEN:
-                return aspectA == Aspect.OPEN || aspectA == Aspect.WINDOW || aspectA == Aspect.ACCESS;
+                return aspectA == Aspect.OPEN || aspectA == Aspect.CLOSED || aspectA == Aspect.ACCESS;
             case Aspect.CLOSED:
                 return aspectA == Aspect.OPEN || aspectA == Aspect.CLOSED;
             default:
