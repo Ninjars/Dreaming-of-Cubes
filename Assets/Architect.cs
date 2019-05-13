@@ -8,6 +8,7 @@ public class Architect : MonoBehaviour {
     public int seed;
     public BlockLibrary blockLibrary;
     public Structure structurePrefab;
+    public int maxRandomSteps = 12;
 
     private System.Random random;
     private List<Structure> archivedStructures;
@@ -22,6 +23,12 @@ public class Architect : MonoBehaviour {
         archive = new GameObject().transform;
         archive.position = transform.position + Vector3.forward * 12;
         archive.gameObject.name = "Archive";
+    }
+
+    public void expandStructure() {
+        for (int i = 0; i < random.Next(maxRandomSteps); i++) {
+            addBlockToActiveStructure();
+        }
     }
 
     public void beginNewStructure() {
