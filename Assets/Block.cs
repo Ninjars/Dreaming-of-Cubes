@@ -29,4 +29,23 @@ public class Block : MonoBehaviour {
                     throw new ArgumentOutOfRangeException("Direction " + direction);
         }
     }
+
+    internal object getAccess(Direction direction) {
+        switch (direction) {
+            case Direction.FORWARD:
+                    return frontAspect.accessPosition;
+                case Direction.BACKWARD:
+                    return backAspect.accessPosition;
+                case Direction.LEFT:
+                    return leftAspect.accessPosition;
+                case Direction.RIGHT:
+                    return rightAspect.accessPosition;
+                case Direction.UPWARD:
+                    return topAspect.accessPosition;
+                case Direction.DOWNWARD:
+                    return bottomAspect.accessPosition;
+                default:
+                    throw new ArgumentOutOfRangeException("Direction " + direction);
+        }
+    }
 }

@@ -8,19 +8,22 @@ public class BlockLibrary : MonoBehaviour {
     private Block[] blocks;
 
     void Start() {
-
-        var allBlocks = GetComponentsInChildren<Block>();
+        blocks = GetComponentsInChildren<Block>();
         foreach (Transform t in transform) {
             t.gameObject.SetActive(false);
         }
 
-        int i = 0;
-        foreach (var block in blocks) {
-            var newBlock = Instantiate(block.gameObject);
-            newBlock.transform.position = transform.position + Vector3.right * i;
-            newBlock.SetActive(true);
-            i++;
-        }
+        // int i = 0;
+        // foreach (var block in blocks) {
+        //     var newBlock = Instantiate(block.gameObject);
+        //     newBlock.transform.position = transform.position + Vector3.right * i;
+        //     newBlock.SetActive(true);
+        //     i++;
+        // }
+    }
+
+    public Block[] getBlocks() {
+        return blocks;
     }
 
     public Block[] getBlocks(Direction direction, Aspect aspect) {
